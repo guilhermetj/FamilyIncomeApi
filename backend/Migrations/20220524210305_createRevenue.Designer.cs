@@ -4,6 +4,7 @@ using FamilyIncomeApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FamilyIncomeApi.Migrations
 {
     [DbContext(typeof(FamilyIncomeContext))]
-    partial class FamilyIncomeContextModelSnapshot : ModelSnapshot
+    [Migration("20220524210305_createRevenue")]
+    partial class createRevenue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +48,7 @@ namespace FamilyIncomeApi.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("tb_expenditure", (string)null);
+                    b.ToTable("tb_familyIcome", (string)null);
                 });
 
             modelBuilder.Entity("FamilyIncomeApi.Models.Entities.Revenue", b =>
@@ -73,7 +75,7 @@ namespace FamilyIncomeApi.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("tb_revenue", (string)null);
+                    b.ToTable("revenues");
                 });
 #pragma warning restore 612, 618
         }

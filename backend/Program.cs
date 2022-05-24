@@ -17,6 +17,7 @@ builder.Services.AddDbContext<FamilyIncomeContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]);
 });
 builder.Services.AddScoped<IExpenditureRepository, ExpenditureRepository>();
+builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
 
 var app = builder.Build();
 
