@@ -1,6 +1,6 @@
 ﻿namespace FamilyIncomeApi.Models.Entities
 {
-    public class Expenditure
+    public class Revenue
     {
         public int id { get; set; }
         public string Description { get; set; }

@@ -1,6 +1,6 @@
-﻿namespace FamilyIncomeApi.Models.Entities
+﻿namespace FamilyIncomeApi.Models.Dtos.ExpenditureDtos
 {
-    public class Expenditure
+    public class ExpenditureDto
     {
         public int id { get; set; }
         public string Description { get; set; }

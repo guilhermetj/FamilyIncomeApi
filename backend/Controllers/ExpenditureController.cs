@@ -1,4 +1,6 @@
-﻿using FamilyIncomeApi.Models.Entities;
+﻿using AutoMapper;
+using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
+using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +11,11 @@ namespace FamilyIncomeApi.Controllers
     public class ExpenditureController : ControllerBase
     {
         private readonly IExpenditureRepository _repository;
-        public ExpenditureController(IExpenditureRepository repository)
+        private readonly IMapper _mapper;
+        public ExpenditureController(IExpenditureRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -19,7 +23,9 @@ namespace FamilyIncomeApi.Controllers
         {
             var expenditure = await _repository.Get();
 
-            return expenditure.Any() ? Ok(expenditure) : NoContent();
+            var expenditureReturn = _mapper.Map<IEnumerable<ExpenditureDto>>(expenditure);
+
+            return Ok(expenditureReturn);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -27,33 +33,32 @@ namespace FamilyIncomeApi.Controllers
             var expenditureBanco = await _repository.GetById(id);
             if (expenditureBanco == null) return BadRequest("Error ao encontrar despesas");
 
-            return Ok(expenditureBanco);
+            var expenditureReturn = _mapper.Map<ExpenditureDetailsDto>(expenditureBanco);
+
+            return Ok(expenditureReturn);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Expenditure expenditure)
+        public async Task<IActionResult> Add(ExpenditureCreateDto request)
         {
-            var expenditureCreate = new Expenditure
-            {
-                Description = expenditure.Description,
-                Value = expenditure.Value,
-                Date = expenditure.Date,
-            };
-            _repository.Create(expenditureCreate);
+            var expenditure = _mapper.Map<Expenditure>(request);
+
+            var expenditureReturn = await _repository.GetByDate(request.Date.Month, request.Description);
+            if (expenditureReturn != null) return BadRequest("Esta despesa já existe");
+
+            _repository.Create(expenditure);
 
             return await _repository.SaveChangesAsync() ? Ok("Criado com sucesso") : BadRequest("Error ao criar");
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, Expenditure expenditure)
+        public async Task<IActionResult> Edit(int id, ExpenditureUpdateDto request)
         {
             var expenditureBanco = await _repository.GetById(id);
             if (expenditureBanco == null) return BadRequest("Error ao encontrar despesas");
 
-            expenditureBanco.Description = expenditure.Description;
-            expenditureBanco.Value = expenditure.Value;
-            expenditureBanco.Date = expenditure.Date;
+            var expenditure = _mapper.Map(request, expenditureBanco);
 
-            _repository.Update(expenditureBanco);
+            _repository.Update(expenditure);
 
             return await _repository.SaveChangesAsync() ? Ok("Editado com sucesso") : BadRequest("Error ao Editar");
         }

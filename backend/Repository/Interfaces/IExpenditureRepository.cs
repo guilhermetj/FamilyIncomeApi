@@ -6,6 +6,7 @@ namespace FamilyIncomeApi.Repository.Interfaces
     {
         Task<IEnumerable<Expenditure>> Get();
         Task<Expenditure> GetById(int id);
+        Task<Expenditure> GetByDate(int month, string description);
         void Create(Expenditure expenditure);
         void Update(Expenditure expenditure);
         void Delete(Expenditure expenditure);

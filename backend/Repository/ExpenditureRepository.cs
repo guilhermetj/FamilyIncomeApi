@@ -21,6 +21,10 @@ namespace FamilyIncomeApi.Repository
         {
             return await _context.expenditures.Where(x => x.id == id).FirstOrDefaultAsync();
         }
+        public async Task<Expenditure> GetByDate(int month, string description)
+        {
+            return await _context.expenditures.Where(x => x.Date.Month == month && x.Description == description).FirstOrDefaultAsync();
+        }
         public void Create(Expenditure expenditure)
         {
             _context.Add(expenditure);
@@ -37,5 +41,7 @@ namespace FamilyIncomeApi.Repository
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+
     }
 }
