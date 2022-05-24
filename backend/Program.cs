@@ -1,3 +1,8 @@
+using FamilyIncomeApi.Data;
+using FamilyIncomeApi.Repository;
+using FamilyIncomeApi.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<FamilyIncomeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]);
+});
+builder.Services.AddScoped<IExpenditureRepository, ExpenditureRepository>();
 
 var app = builder.Build();
 
