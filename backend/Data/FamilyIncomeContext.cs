@@ -20,6 +20,7 @@ namespace FamilyIncomeApi.Data
             builder.Entity<Expenditure>().Property(x => x.Description).HasColumnName("description").IsRequired();
             builder.Entity<Expenditure>().Property(x => x.Value).HasColumnName("value").IsRequired();
             builder.Entity<Expenditure>().Property(x => x.Date).HasColumnName("date");
+            builder.Entity<Expenditure>().Property(x => x.Caregory).HasColumnName("category");
 
             builder.Entity<Revenue>().ToTable("tb_revenue");
             builder.Entity<Revenue>().HasKey(x => x.id);
@@ -27,6 +28,7 @@ namespace FamilyIncomeApi.Data
             builder.Entity<Revenue>().Property(x => x.Description).HasColumnName("description").IsRequired();
             builder.Entity<Revenue>().Property(x => x.Value).HasColumnName("value").IsRequired();
             builder.Entity<Revenue>().Property(x => x.Date).HasColumnName("date");
+            builder.Entity<Revenue>().Property(x => x.Caregory).HasColumnName("category");
         }
     }
 }

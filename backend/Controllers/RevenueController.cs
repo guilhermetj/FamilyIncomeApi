@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FamilyIncomeApi.Models.Dtos.RevenueDtos;
 using FamilyIncomeApi.Models.Entities;
+using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

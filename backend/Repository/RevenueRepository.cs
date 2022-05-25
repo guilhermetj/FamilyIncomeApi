@@ -1,5 +1,6 @@
 ﻿using FamilyIncomeApi.Data;
 using FamilyIncomeApi.Models.Entities;
+using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace FamilyIncomeApi.Repository
             var revenue = _context.revenues.Select(x => new Revenue { 
                 id = x.id,
                 Description = x.Description,
+                Caregory = x.Caregory,
                 Date = x.Date,
                 Value = x.Value
             }).AsQueryable();

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
 using FamilyIncomeApi.Models.Entities;
+using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +20,9 @@ namespace FamilyIncomeApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]ExpenditureParams expenditureParams)
         {
-            var expenditure = await _repository.Get();
+            var expenditure = await _repository.Get(expenditureParams);
 
             var expenditureReturn = _mapper.Map<IEnumerable<ExpenditureDto>>(expenditure);
 

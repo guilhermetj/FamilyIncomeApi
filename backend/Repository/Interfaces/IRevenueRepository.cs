@@ -1,4 +1,5 @@
 ﻿using FamilyIncomeApi.Models.Entities;
+using FamilyIncomeApi.Models.Params;
 
 namespace FamilyIncomeApi.Repository.Interfaces
 {

@@ -1,5 +1,6 @@
 ﻿using FamilyIncomeApi.Data;
 using FamilyIncomeApi.Models.Entities;
+using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,24 @@ namespace FamilyIncomeApi.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Expenditure>> Get()
+        public async Task<IEnumerable<Expenditure>> Get(ExpenditureParams expenditureParams)
         {
-            return await _context.expenditures.ToListAsync();
+            var expenditure = _context.expenditures.Select(x => new Expenditure
+            {
+                id = x.id,
+                Description = x.Description,
+                Caregory = x.Caregory,
+                Date = x.Date,
+                Value = x.Value
+            }).AsQueryable();
+
+            if (!string.IsNullOrEmpty(expenditureParams.DescriptionExpenditure))
+            {
+                string description = expenditureParams.DescriptionExpenditure.ToLower().Trim();
+                expenditure = expenditure.Where(x => x.Description.ToLower().Contains(description));
+            }
+
+            return await expenditure.ToListAsync();
         }
         public async Task<Expenditure> GetById(int id)
         {

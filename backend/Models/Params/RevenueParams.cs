@@ -1,4 +1,4 @@
-﻿namespace FamilyIncomeApi.Models.Entities
+﻿namespace FamilyIncomeApi.Models.Params
 {
     public class RevenueParams
     {
