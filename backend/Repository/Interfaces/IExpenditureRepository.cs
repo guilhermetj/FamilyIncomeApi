@@ -6,6 +6,7 @@ namespace FamilyIncomeApi.Repository.Interfaces
     public interface IExpenditureRepository
     {
         Task<IEnumerable<Expenditure>> Get(ExpenditureParams expenditureParams);
+        Task<IEnumerable<Expenditure>> GetByMonth(int year, int month);
         Task<Expenditure> GetById(int id);
         Task<Expenditure> GetByDate(int month, string description);
         void Create(Expenditure expenditure);

@@ -27,6 +27,16 @@ namespace FamilyIncomeApi.Controllers
 
             return Ok(revenueReturn);
         }
+        [HttpGet("{year}/{month}")]
+        public async Task<IActionResult> GetByMonth(int year, int month)
+        {
+            var revenueBanco = await _repository.GetByMonth(year, month);
+            if (revenueBanco == null) return BadRequest("Error ao encontrar receita");
+
+            var revenueBancoReturn = _mapper.Map< IEnumerable<RevenueDto>>(revenueBanco);
+
+            return Ok(revenueBancoReturn);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

@@ -37,6 +37,10 @@ namespace FamilyIncomeApi.Repository
         {
             return await _context.expenditures.Where(x => x.id == id).FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<Expenditure>> GetByMonth(int year, int month)
+        {
+            return await _context.expenditures.Where(x => x.Date.Year == year && x.Date.Month == month).ToListAsync();
+        }
         public async Task<Expenditure> GetByDate(int month, string description)
         {
             return await _context.expenditures.Where(x => x.Date.Month == month && x.Description == description).FirstOrDefaultAsync();
