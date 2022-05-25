@@ -18,9 +18,9 @@ namespace FamilyIncomeApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]RevenueParams revenueParams)
         {
-            var revenue = await _repository.Get();
+            var revenue = await _repository.Get(revenueParams);
 
             var revenueReturn = _mapper.Map<IEnumerable<RevenueDto>>(revenue);
 

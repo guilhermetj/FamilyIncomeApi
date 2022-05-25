@@ -13,9 +13,22 @@ namespace FamilyIncomeApi.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Revenue>> Get()
+        public async Task<IEnumerable<Revenue>> Get(RevenueParams revenueParams)
         {
-            return await _context.revenues.ToListAsync();
+            var revenue = _context.revenues.Select(x => new Revenue { 
+                id = x.id,
+                Description = x.Description,
+                Date = x.Date,
+                Value = x.Value
+            }).AsQueryable();
+
+            if (!string.IsNullOrEmpty(revenueParams.DescriptionRevenue))
+            {
+                string description = revenueParams.DescriptionRevenue.ToLower().Trim();
+                revenue = revenue.Where(x => x.Description.ToLower().Contains(description));
+            }
+
+            return await revenue.ToListAsync();
         }
         public async Task<Revenue> GetById(int id)
         {

@@ -4,7 +4,7 @@ namespace FamilyIncomeApi.Repository.Interfaces
 {
     public interface IRevenueRepository
     {
-        Task<IEnumerable<Revenue>> Get();
+        Task<IEnumerable<Revenue>> Get(RevenueParams revenueParams);
         Task<Revenue> GetById(int id);
         Task<Revenue> GetByDate(int month, string description);
         void Create(Revenue revenue);
