@@ -1,4 +1,5 @@
 ﻿using FamilyIncomeApi.Data;
+using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Repository.Interfaces;
@@ -18,9 +19,10 @@ namespace FamilyIncomeApi.Repository
         {
             var expenditure = _context.expenditures.Select(x => new Expenditure
             {
-                id = x.id,
+                Id = x.Id,
                 Description = x.Description,
-                Caregory = x.Caregory,
+                CategoryId = x.CategoryId,
+                Category = x.Category,
                 Date = x.Date,
                 Value = x.Value
             }).AsQueryable();
@@ -35,7 +37,7 @@ namespace FamilyIncomeApi.Repository
         }
         public async Task<Expenditure> GetById(int id)
         {
-            return await _context.expenditures.Where(x => x.id == id).FirstOrDefaultAsync();
+            return await _context.expenditures.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
         public async Task<IEnumerable<Expenditure>> GetByMonth(int year, int month)
         {

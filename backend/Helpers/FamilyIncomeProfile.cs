@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FamilyIncomeApi.Models.Dtos.CategoryDtos;
 using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
 using FamilyIncomeApi.Models.Dtos.RevenueDtos;
 using FamilyIncomeApi.Models.Entities;
@@ -18,6 +19,8 @@ namespace FamilyIncomeApi.Helpers
             CreateMap<Revenue, RevenueDetailsDto>();
             CreateMap<RevenueCreateDto, Revenue>();
             CreateMap<RevenueUpdateDto, Revenue>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Category, CategoryDto>();
         }
     }
 }

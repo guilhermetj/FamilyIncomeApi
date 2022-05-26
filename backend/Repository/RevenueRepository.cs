@@ -17,9 +17,8 @@ namespace FamilyIncomeApi.Repository
         public async Task<IEnumerable<Revenue>> Get(RevenueParams revenueParams)
         {
             var revenue = _context.revenues.Select(x => new Revenue { 
-                id = x.id,
+                Id = x.Id,
                 Description = x.Description,
-                Caregory = x.Caregory,
                 Date = x.Date,
                 Value = x.Value
             }).AsQueryable();
@@ -34,7 +33,7 @@ namespace FamilyIncomeApi.Repository
         }
         public async Task<Revenue> GetById(int id)
         {
-            return await _context.revenues.Where(x => x.id == id).FirstOrDefaultAsync();
+            return await _context.revenues.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
         public async Task<IEnumerable<Revenue>> GetByMonth(int year, int month)
         {

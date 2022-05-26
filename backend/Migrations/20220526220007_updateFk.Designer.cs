@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FamilyIncomeApi.Migrations
 {
     [DbContext(typeof(FamilyIncomeContext))]
-    [Migration("20220524210555_renameTables")]
-    partial class renameTables
+    [Migration("20220526220007_updateFk")]
+    partial class updateFk
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,14 +24,37 @@ namespace FamilyIncomeApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("FamilyIncomeApi.Models.Entities.Expenditure", b =>
+            modelBuilder.Entity("FamilyIncomeApi.Models.Entities.Category", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tb_categories", (string)null);
+                });
+
+            modelBuilder.Entity("FamilyIncomeApi.Models.Entities.Expenditure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("category_id");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2")
@@ -42,23 +65,25 @@ namespace FamilyIncomeApi.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("description");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)")
+                    b.Property<double>("Value")
+                        .HasColumnType("float")
                         .HasColumnName("value");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("tb_expenditure", (string)null);
                 });
 
             modelBuilder.Entity("FamilyIncomeApi.Models.Entities.Revenue", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2")
@@ -69,13 +94,29 @@ namespace FamilyIncomeApi.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("description");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)")
+                    b.Property<double>("Value")
+                        .HasColumnType("float")
                         .HasColumnName("value");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("tb_revenue", (string)null);
+                });
+
+            modelBuilder.Entity("FamilyIncomeApi.Models.Entities.Expenditure", b =>
+                {
+                    b.HasOne("FamilyIncomeApi.Models.Entities.Category", "Category")
+                        .WithMany("Expenditure")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("FamilyIncomeApi.Models.Entities.Category", b =>
+                {
+                    b.Navigation("Expenditure");
                 });
 #pragma warning restore 612, 618
         }

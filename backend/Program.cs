@@ -18,6 +18,7 @@ builder.Services.AddDbContext<FamilyIncomeContext>(options =>
 });
 builder.Services.AddScoped<IExpenditureRepository, ExpenditureRepository>();
 builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
+builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 
 var app = builder.Build();
 
