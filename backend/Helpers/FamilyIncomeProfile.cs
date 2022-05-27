@@ -20,7 +20,8 @@ namespace FamilyIncomeApi.Helpers
             CreateMap<RevenueCreateDto, Revenue>();
             CreateMap<RevenueUpdateDto, Revenue>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<Category, CategoryDto>();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+
         }
     }
 }
