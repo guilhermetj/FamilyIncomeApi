@@ -2,6 +2,7 @@
 using FamilyIncomeApi.Models.Dtos.CategoryDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Repository.Interfaces;
+using FamilyIncomeApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyIncomeApi.Controllers
@@ -10,59 +11,43 @@ namespace FamilyIncomeApi.Controllers
     [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
-        ICategoryRepository _repository;
-        IMapper _mapper;
-        public CategoryController(ICategoryRepository repository, IMapper mapper)
+        private readonly ICategoryService _service;
+
+        public CategoryController(ICategoryService service)
         {
-            _repository = repository;
-            _mapper = mapper;
+            _service = service;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var category = await _repository.Get();
+            var category = await _service.Get();
 
-            return Ok(category);
+            return category.Any()
+                                ? Ok(category)
+                                : NoContent();
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var category = await _repository.GetById(id);
-            if (category == null) return BadRequest("Categoria não encontrada");
+            var category = await _service.GetById(id);
 
-            return Ok(category);         
+            return category != null ? Ok(category) : NotFound("Categoria não encontrada");
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CategoryDto request)
         {
-            var category = _mapper.Map<Category>(request);
-
-            _repository.Create(category);
-
-            return await _repository.SaveChangesAsync() ? Ok("Criado com sucesso") : BadRequest("Error ao criar") ;
+            return await _service.Create(request) ? Ok("Criado com sucesso") : BadRequest("Error ao criar");
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, CategoryDto request)
         {
-            var categoryDatabase = await _repository.GetById(id);
-            if (categoryDatabase == null) return BadRequest("Categoria não encontrada");
-
-            var expenditure = _mapper.Map(request, categoryDatabase);
-
-            _repository.Update(categoryDatabase);
-
-            return await _repository.SaveChangesAsync() ? Ok("Editado com sucesso") : BadRequest("Error ao editar");
+            return await _service.Update(id, request) ? Ok("Editado com sucesso") : BadRequest("Error ao editar");
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var categoryDatabase = await _repository.GetById(id);
-            if (categoryDatabase == null) return BadRequest("Categoria não encontrada");
-
-            _repository.Delete(categoryDatabase);
-
-            return await _repository.SaveChangesAsync() ? Ok("Deletado com sucesso") : BadRequest("Error ao deletar");
+            return await _service.Delete(id) ? Ok("Deletado com sucesso") : BadRequest("Error ao deletar");
         }
     }
 }

@@ -8,6 +8,7 @@ namespace FamilyIncomeApi.Data
         public FamilyIncomeContext(DbContextOptions<FamilyIncomeContext> options) : base(options)
         {
         }
+
         public DbSet<Expenditure> expenditures { get; set; }
         public DbSet<Revenue> revenues { get; set; }
         public DbSet<Category> categories { get; set; }

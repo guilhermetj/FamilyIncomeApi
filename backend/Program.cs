@@ -1,6 +1,8 @@
 using FamilyIncomeApi.Data;
 using FamilyIncomeApi.Repository;
 using FamilyIncomeApi.Repository.Interfaces;
+using FamilyIncomeApi.Services;
+using FamilyIncomeApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -20,6 +22,7 @@ builder.Services.AddScoped<IExpenditureRepository, ExpenditureRepository>();
 builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
