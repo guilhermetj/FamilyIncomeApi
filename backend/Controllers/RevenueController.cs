@@ -3,6 +3,7 @@ using FamilyIncomeApi.Models.Dtos.RevenueDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Repository.Interfaces;
+using FamilyIncomeApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyIncomeApi.Controllers
@@ -11,75 +12,50 @@ namespace FamilyIncomeApi.Controllers
     [Route("[controller]")]
     public class RevenueController : ControllerBase
     {
-        private readonly IRevenueRepository _repository;
-        private readonly IMapper _mapper;
-        public RevenueController(IRevenueRepository repository, IMapper mapper)
+        private readonly IRevenueService _service;
+
+        public RevenueController(IRevenueService service)
         {
-            _repository = repository;
-            _mapper = mapper;
+            _service = service;
         }
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]RevenueParams revenueParams)
         {
-            var revenue = await _repository.Get(revenueParams);
+            var revenue = await _service.Get(revenueParams);
 
-            var revenueReturn = _mapper.Map<IEnumerable<RevenueDto>>(revenue);
-
-            return Ok(revenueReturn);
+            return revenue.Any()
+                                ? Ok(revenue)
+                                : NoContent();
         }
         [HttpGet("{year}/{month}")]
         public async Task<IActionResult> GetByMonth(int year, int month)
         {
-            var revenueBanco = await _repository.GetByMonth(year, month);
-            if (revenueBanco == null) return BadRequest("Error ao encontrar receita");
+            var revenue = await _service.GetByMonth(year, month);
 
-            var revenueBancoReturn = _mapper.Map< IEnumerable<RevenueDto>>(revenueBanco);
+            return revenue != null ? Ok(revenue) : NotFound("Categoria não encontrada");
 
-            return Ok(revenueBancoReturn);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var revenueBanco = await _repository.GetById(id);
-            if (revenueBanco == null) return BadRequest("Error ao encontrar receita");
+            var revenue = await _service.GetById(id);
 
-            var revenueBancoReturn = _mapper.Map<RevenueDetailsDto>(revenueBanco);
-
-            return Ok(revenueBancoReturn);
+            return revenue != null ? Ok(revenue) : NotFound("Categoria não encontrada");
         }
         [HttpPost]
         public async Task<IActionResult> Add(RevenueCreateDto request)
         {
-            var revenue = _mapper.Map<Revenue>(request);
-
-            var revenueReturn = await _repository.GetByDate(request.Date.Month, request.Description);
-            if (revenueReturn != null) return BadRequest("Esta Receita já existe");
-
-            _repository.Create(revenue);
-
-            return await _repository.SaveChangesAsync() ? Ok("Criado com sucesso") : BadRequest("Error ao criar");
+            return await _service.Create(request) ? Ok("Criado com sucesso") : BadRequest("Error ao criar");
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id, RevenueUpdateDto request)
         {
-            var revenueBanco = await _repository.GetById(id);
-            if (revenueBanco == null) return BadRequest("Error ao encontrar receita");
-
-            var revenue = _mapper.Map(request, revenueBanco);
-
-            _repository.Update(revenue);
-
-            return await _repository.SaveChangesAsync() ? Ok("Editado com sucesso") : BadRequest("Error ao Editar");
+            return await _service.Update(id, request) ? Ok("Editado com sucesso") : BadRequest("Error ao Editar");
         }
         [HttpDelete("id")]
         public async Task<IActionResult> Delete(int id)
         {
-            var revenueBanco = await _repository.GetById(id);
-            if (revenueBanco == null) return BadRequest("Error ao encontrar receita");
-
-            _repository.Delete(revenueBanco);
-
-            return await _repository.SaveChangesAsync() ? Ok("Deletado com sucesso") : BadRequest("Error ao Deletar");
+            return await _service.Delete(id) ? Ok("Deletado com sucesso") : BadRequest("Error ao Deletar");
         }
     }
 }

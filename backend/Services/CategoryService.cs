@@ -56,15 +56,15 @@ namespace FamilyIncomeApi.Services
         {
             var categoryDatabase = await _repository.GetById(id);
 
-            if (categoryDatabase is not null)
+            if (categoryDatabase == null)
             {
-                _repository.Delete(categoryDatabase);
-                return await _repository.SaveChangesAsync();
+                throw new NotFoundException("Categoria não encontrada");
             }
 
-            return false;
+            _repository.Delete(categoryDatabase);
+            
+            return await _repository.SaveChangesAsync();
+
         }
-
-
     }
 }

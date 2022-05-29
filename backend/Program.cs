@@ -22,7 +22,10 @@ builder.Services.AddScoped<IExpenditureRepository, ExpenditureRepository>();
 builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IRevenueService, RevenueService>();
+builder.Services.AddScoped<IExpenditureService, ExpenditureService>();
 
 var app = builder.Build();
 
