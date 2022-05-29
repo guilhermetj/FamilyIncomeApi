@@ -3,7 +3,7 @@ using FamilyIncomeApi.Models.Params;
 
 namespace FamilyIncomeApi.Services.Interfaces
 {
-    public class IExpenditureService
+    public interface IExpenditureService
     {
         Task<IEnumerable<ExpenditureDto>> Get(ExpenditureParams expenditureParams);
         Task<IEnumerable<ExpenditureDetailsDto>> GetByMonth(int year, int month);

@@ -37,15 +37,15 @@ namespace FamilyIncomeApi.Repository
         }
         public async Task<Expenditure> GetById(int id)
         {
-            return await _context.expenditures.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _context.expenditures.Include(x => x.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
         }
         public async Task<IEnumerable<Expenditure>> GetByMonth(int year, int month)
         {
-            return await _context.expenditures.Where(x => x.Date.Year == year && x.Date.Month == month).ToListAsync();
+            return await _context.expenditures.Include(x => x.Category).Where(x => x.Date.Year == year && x.Date.Month == month).ToListAsync();
         }
         public async Task<Expenditure> GetByDate(int month, string description)
         {
-            return await _context.expenditures.Where(x => x.Date.Month == month && x.Description == description).FirstOrDefaultAsync();
+            return await _context.expenditures.Include(x => x.Category).Where(x => x.Date.Month == month && x.Description == description).FirstOrDefaultAsync();
         }
         public void Create(Expenditure expenditure)
         {

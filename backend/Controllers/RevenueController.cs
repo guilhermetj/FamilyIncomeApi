@@ -32,7 +32,7 @@ namespace FamilyIncomeApi.Controllers
         {
             var revenue = await _service.GetByMonth(year, month);
 
-            return revenue != null ? Ok(revenue) : NotFound("Categoria não encontrada");
+            return revenue != null ? Ok(revenue) : NotFound("Receita não encontrada");
 
         }
         [HttpGet("{id}")]
@@ -40,7 +40,7 @@ namespace FamilyIncomeApi.Controllers
         {
             var revenue = await _service.GetById(id);
 
-            return revenue != null ? Ok(revenue) : NotFound("Categoria não encontrada");
+            return revenue != null ? Ok(revenue) : NotFound("Receita não encontrada");
         }
         [HttpPost]
         public async Task<IActionResult> Add(RevenueCreateDto request)

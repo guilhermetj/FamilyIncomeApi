@@ -1,5 +1,4 @@
 ﻿using FamilyIncomeApi.Models.Dtos.RevenueDtos;
-using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Models.Params;
 
 namespace FamilyIncomeApi.Services.Interfaces
