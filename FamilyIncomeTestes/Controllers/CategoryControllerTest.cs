@@ -54,38 +54,29 @@ namespace FamilyIncomeTestes.Controllers
         [Fact]
         public async void TestChamadaGetById200()
         {
+            var requisicao = _factory.BuscaCategoriasPeloId(new CategoryDetailsDto())
+                                     .Controller();
 
-            var serviceMock = new Mock<ICategoryService>();
-            serviceMock.Setup(x => x.GetById(1)).ReturnsAsync(new CategoryDetailsDto());
-
-
-            var controller = new CategoryController(serviceMock.Object);
-
-            var result = (OkObjectResult)await controller.GetById(1);
+            var result = (OkObjectResult)await requisicao.GetById(1);
 
             result.StatusCode.Should().Be(200);
 
         }
         [Fact]
-        public async void TestChamadaGetById204()
+        public async void TestChamadaGetById404()
         {
 
-            var categorias = _fixture.Create<CategoryDetailsDto>();
+            var requisicao = _factory.BuscaCategoriasPeloId(new CategoryDetailsDto())
+                                      .Controller();
 
-            var serviceMock = new Mock<ICategoryService>();
-            serviceMock.Setup(x => x.GetById(1)).ReturnsAsync(categorias);
+            var result = (NotFoundObjectResult)await requisicao.GetById(2);
 
-
-            var controller = new CategoryController(serviceMock.Object);
-
-            var result = (OkObjectResult)await controller.GetById(1);
-
-            result.StatusCode.Should().Be(200);
+            result.StatusCode.Should().Be(404);
 
         }
 
         [Fact]
-        public async void TestCreate200()
+        public async void TestChamadaCreate200()
         {
             var categoria = _fixture.Create<CategoryDto>();
 
@@ -94,6 +85,44 @@ namespace FamilyIncomeTestes.Controllers
 
             result.StatusCode.Should().Be(200);
         }
+        [Fact]
+        public async void TestChamadaUpdate200()
+        {
+            var categoria = _fixture.Create<CategoryDto>();
+
+            var factory = _factory.AlteraCategorias(categoria).Controller();
+            var result = (OkObjectResult)await factory.Update(1, categoria);
+
+            result.StatusCode.Should().Be(200);
+        }
+        [Fact]
+        public async void TestChamadaUpdate400()
+        {
+
+            var factory = _factory.AlteraCategorias(new CategoryDto()).Controller();
+            var result = (BadRequestObjectResult)await factory.Update(2, new CategoryDto());
+
+            result.StatusCode.Should().Be(400);
+        }
+        [Fact]
+        public async void TestChamadaDelete200()
+        {
+
+            var factory = _factory.DeletaCategorias(new CategoryDto()).Controller();
+            var result = (OkObjectResult)await factory.Delete(1);
+
+            result.StatusCode.Should().Be(200);
+        }
+        [Fact]
+        public async void TestChamadaDelete400()
+        {
+
+            var factory = _factory.DeletaCategorias(new CategoryDto()).Controller();
+            var result = (BadRequestObjectResult)await factory.Delete(3);
+
+            result.StatusCode.Should().Be(400);
+        }
+
 
     }
 }

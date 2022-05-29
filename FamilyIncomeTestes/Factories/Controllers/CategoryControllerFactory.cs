@@ -25,12 +25,28 @@ namespace FamilyIncomeTestes.Factories.Controllers
 
             return this;
         }
+        public CategoryControllerFactory BuscaCategoriasPeloId(CategoryDetailsDto categorias)
+        {
+            _categoryService.Setup(x => x.GetById(1)).ReturnsAsync(categorias);
+
+            return this;
+        }
         public CategoryControllerFactory CriaCategorias(CategoryDto categoria)
         {
             _categoryService.Setup(x => x.Create(categoria)).ReturnsAsync(true);
             return this;
         }
-        
+        public CategoryControllerFactory AlteraCategorias(CategoryDto categoria)
+        {
+            _categoryService.Setup(x => x.Update(1, categoria)).ReturnsAsync(true);
+            return this;
+        }
+        public CategoryControllerFactory DeletaCategorias(CategoryDto categoria)
+        {
+            _categoryService.Setup(x => x.Delete(1)).ReturnsAsync(true);
+            return this;
+        }
+
         public ICategoryService Service()
         {
             return _categoryService.Object;
