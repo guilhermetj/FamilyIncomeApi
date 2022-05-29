@@ -32,7 +32,9 @@ namespace FamilyIncomeApi.Controllers
         {
             var revenue = await _service.GetByMonth(year, month);
 
-            return revenue != null ? Ok(revenue) : NotFound("Receita não encontrada");
+            return revenue.Any()
+                               ? Ok(revenue)
+                               : NoContent();
 
         }
         [HttpGet("{id}")]

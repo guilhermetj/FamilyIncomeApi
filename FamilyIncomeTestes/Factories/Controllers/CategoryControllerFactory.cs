@@ -46,11 +46,6 @@ namespace FamilyIncomeTestes.Factories.Controllers
             _categoryService.Setup(x => x.Delete(1)).ReturnsAsync(true);
             return this;
         }
-
-        public ICategoryService Service()
-        {
-            return _categoryService.Object;
-        }
         public CategoryController Controller()
         {
             return new CategoryController(_categoryService.Object);

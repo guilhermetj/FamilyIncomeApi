@@ -16,13 +16,11 @@ namespace FamilyIncomeTestes.Controllers
     {
         private Fixture _fixture;
         private CategoryControllerFactory _factory;
-        private Mock<ICategoryService> _serviceMock;
 
         public CategoryControllerTest()
         {
             _fixture = new Fixture();
             _factory = new CategoryControllerFactory();
-            _serviceMock = new Mock<ICategoryService>();
         }
         [Fact]
         public async void TestChamadaGet200()
