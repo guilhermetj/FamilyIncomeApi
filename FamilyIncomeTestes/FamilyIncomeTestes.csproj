@@ -28,12 +28,4 @@
     <ProjectReference Include="..\backend\FamilyIncomeApi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Factories\Controllers\" />
-    <Folder Include="Factories\Repository\" />
-    <Folder Include="Factories\Services\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

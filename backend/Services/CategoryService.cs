@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FamilyIncomeApi.Extensions;
 using FamilyIncomeApi.Models.Dtos.CategoryDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Repository.Interfaces;
@@ -41,15 +42,15 @@ namespace FamilyIncomeApi.Services
         {
             var categoryDatabase = await _repository.GetById(id);
 
-            if (categoryDatabase is not null)
+            if(categoryDatabase == null)
             {
-                var categoryUpdate = _mapper.Map(category, categoryDatabase);
-                _repository.Update(categoryUpdate);
-                return await _repository.SaveChangesAsync();
+                throw new NotFoundException("Categoria não encontrada");
             }
 
-            return false;
-          
+            var categoryUpdate = _mapper.Map(category, categoryDatabase);
+            _repository.Update(categoryUpdate);
+            return await _repository.SaveChangesAsync();
+        
         }
         public async Task<bool> Delete(int id)
         {
