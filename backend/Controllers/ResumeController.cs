@@ -1,4 +1,5 @@
 ﻿using FamilyIncomeApi.Repository.Interfaces;
+using FamilyIncomeApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyIncomeApi.Controllers
@@ -7,17 +8,19 @@ namespace FamilyIncomeApi.Controllers
     [Route("[controller]")]
     public class ResumeController : ControllerBase
     {
-        private readonly IResumeRepository _repository;
 
-        public ResumeController(IResumeRepository repository)
+        private readonly IResumeService _service;
+        public ResumeController(IResumeService service)
         {
-            _repository = repository;
+            _service = service;
         }
+
         [HttpGet("{year}/{month}")]
         public async Task<IActionResult> Get(int year, int month)
         {
-            var resume = await _repository.GetResume(year, month);
-            return Ok(resume);
+            var resume = await _service.GetResume(year, month);
+
+            return resume != null ? Ok(resume) : NotFound("Resumo não encontrado");
         }
     }
 }
