@@ -39,7 +39,9 @@ namespace FamilyIncomeApi.Controllers
         {
             var expenditure = await _service.GetByMonth(year, month);
 
-            return expenditure != null ? Ok(expenditure) : NotFound("Despesa não encontrada");
+            return expenditure.Any()
+                               ? Ok(expenditure)
+                               : NoContent();
         }
         [HttpPost]
         public async Task<IActionResult> Add(ExpenditureCreateDto request)
