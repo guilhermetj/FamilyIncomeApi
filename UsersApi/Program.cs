@@ -17,7 +17,9 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]);
 });
-builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+                 opt => opt.SignIn.RequireConfirmedEmail = true
+                 )
                 .AddEntityFrameworkStores<UserDbContext>();
 
 builder.Services.AddScoped<UserService, UserService>();
