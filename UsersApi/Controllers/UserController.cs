@@ -16,10 +16,10 @@ namespace UsersApi.Controllers
         [HttpPost]
         public IActionResult CreateUser(CreateUserDto createDto)
         {
-            var resultado = _service.Create(createDto);
-            if (resultado.IsFailed) return StatusCode(500);
+            var result = _service.Create(createDto);
+            if (result.IsFailed) return StatusCode(500);
 
-            return Ok("Usuario cadastrado com sucesso");
+            return Ok(result.Successes.FirstOrDefault());
         }
     }
 }

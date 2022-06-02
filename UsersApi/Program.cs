@@ -20,7 +20,8 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
                  opt => opt.SignIn.RequireConfirmedEmail = true
                  )
-                .AddEntityFrameworkStores<UserDbContext>();
+                .AddEntityFrameworkStores<UserDbContext>()
+                .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<UserService, UserService>();
 builder.Services.AddScoped<LoginService, LoginService>();
