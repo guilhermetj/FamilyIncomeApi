@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UsersApi.Data.Dtos;
+using UsersApi.Data.Requests;
 using UsersApi.Services;
 
 namespace UsersApi.Controllers
@@ -17,6 +18,14 @@ namespace UsersApi.Controllers
         public IActionResult CreateUser(CreateUserDto createDto)
         {
             var result = _service.Create(createDto);
+            if (result.IsFailed) return StatusCode(500);
+
+            return Ok(result.Successes.FirstOrDefault());
+        }
+        [HttpPost("/ativa")]
+        public IActionResult ActiveUser(ActiveUserRequest request)
+        {
+            var result = _service.ActiveUser(request);
             if (result.IsFailed) return StatusCode(500);
 
             return Ok(result.Successes.FirstOrDefault());
