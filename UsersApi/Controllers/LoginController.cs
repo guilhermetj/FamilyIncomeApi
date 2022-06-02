@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentResults;
+using Microsoft.AspNetCore.Mvc;
 using UsersApi.Data.Requests;
 using UsersApi.Services;
 
@@ -17,8 +18,9 @@ namespace UsersApi.Controllers
         public IActionResult LoginUser(LoginRequest request)
         {
             var result = _service.LoginUser(request);
-            if (result.IsFailed) return Unauthorized();
-            return Ok();
+
+            if (result.IsFailed) return Unauthorized(result.Errors.FirstOrDefault());
+            return Ok(result.Successes.FirstOrDefault());
         }
     }
 }

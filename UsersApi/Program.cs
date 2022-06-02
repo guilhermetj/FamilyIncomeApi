@@ -21,6 +21,7 @@ builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
                 .AddEntityFrameworkStores<UserDbContext>();
 builder.Services.AddScoped<UserService, UserService>();
 builder.Services.AddScoped<LoginService, LoginService>();
+builder.Services.AddScoped<TokenService, TokenService>();
 
 var app = builder.Build();
 
