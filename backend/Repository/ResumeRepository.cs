@@ -1,5 +1,5 @@
 ﻿using FamilyIncomeApi.Data;
-using FamilyIncomeApi.Models.Dtos.ResumeDtos;
+using FamilyIncomeApi.Data.Dtos.ResumeDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;

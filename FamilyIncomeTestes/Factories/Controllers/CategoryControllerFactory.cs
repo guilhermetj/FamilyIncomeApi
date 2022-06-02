@@ -1,5 +1,5 @@
 ﻿using FamilyIncomeApi.Controllers;
-using FamilyIncomeApi.Models.Dtos.CategoryDtos;
+using FamilyIncomeApi.Data.Dtos.CategoryDtos;
 using FamilyIncomeApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

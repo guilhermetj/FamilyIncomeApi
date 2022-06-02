@@ -1,4 +1,4 @@
-﻿namespace FamilyIncomeApi.Models.Dtos.RevenueDtos
+﻿namespace FamilyIncomeApi.Data.Dtos.RevenueDtos
 {
     public class RevenueUpdateDto
     {

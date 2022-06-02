@@ -1,6 +1,8 @@
-﻿namespace FamilyIncomeApi.Models.Dtos.ExpenditureDtos
+﻿using FamilyIncomeApi.Models.Entities;
+
+namespace FamilyIncomeApi.Data.Dtos.ExpenditureDtos
 {
-    public class ExpenditureUpdateDto
+    public class ExpenditureCreateDto
     {
         public string Description { get; set; }
         public int CategoryId { get; set; }

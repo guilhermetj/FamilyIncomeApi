@@ -1,4 +1,4 @@
-﻿namespace FamilyIncomeApi.Models.Dtos.CategoryDtos
+﻿namespace FamilyIncomeApi.Data.Dtos.CategoryDtos
 {
     public class CategoryDetailsDto
     {

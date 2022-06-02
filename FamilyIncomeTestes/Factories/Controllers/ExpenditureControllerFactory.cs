@@ -1,5 +1,5 @@
 ﻿using FamilyIncomeApi.Controllers;
-using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
+using FamilyIncomeApi.Data.Dtos.ExpenditureDtos;
 using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Services.Interfaces;
 using Moq;

@@ -1,9 +1,9 @@
-﻿using FamilyIncomeApi.Models.Dtos.CategoryDtos;
+﻿using FamilyIncomeApi.Data.Dtos.CategoryDtos;
 using FamilyIncomeApi.Models.Entities;
 
-namespace FamilyIncomeApi.Models.Dtos.ExpenditureDtos
+namespace FamilyIncomeApi.Data.Dtos.ExpenditureDtos
 {
-    public class ExpenditureDetailsDto
+    public class ExpenditureDto
     {
         public int Id { get; set; }
         public string Description { get; set; }

@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using FamilyIncomeApi.Models.Dtos.RevenueDtos;
+using FamilyIncomeApi.Data.Dtos.RevenueDtos;
 using FamilyIncomeApi.Models.Params;
 using FamilyIncomeTestes.Factories.Controllers;
 using FluentAssertions;

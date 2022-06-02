@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using FamilyIncomeApi.Models.Dtos.ResumeDtos;
+using FamilyIncomeApi.Data.Dtos.ResumeDtos;
 using FamilyIncomeTestes.Factories.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;

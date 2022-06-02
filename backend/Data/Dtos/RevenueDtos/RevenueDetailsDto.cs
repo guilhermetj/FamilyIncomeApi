@@ -1,6 +1,6 @@
-﻿namespace FamilyIncomeApi.Models.Dtos.RevenueDtos
+﻿namespace FamilyIncomeApi.Data.Dtos.RevenueDtos
 {
-    public class RevenueDto
+    public class RevenueDetailsDto
     {
         public int Id { get; set; }
         public string Description { get; set; }

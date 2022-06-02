@@ -1,8 +1,8 @@
-﻿using FamilyIncomeApi.Models.Dtos.CategoryDtos;
+﻿using FamilyIncomeApi.Data.Dtos.CategoryDtos;
 using FamilyIncomeApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamilyIncomeApi.Models.Dtos.ResumeDtos
+namespace FamilyIncomeApi.Data.Dtos.ResumeDtos
 {
     public class ResumeDto
     {

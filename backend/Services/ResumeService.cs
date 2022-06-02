@@ -1,5 +1,5 @@
 ﻿using FamilyIncomeApi.Extensions;
-using FamilyIncomeApi.Models.Dtos.ResumeDtos;
+using FamilyIncomeApi.Data.Dtos.ResumeDtos;
 using FamilyIncomeApi.Repository.Interfaces;
 using FamilyIncomeApi.Services.Interfaces;
 

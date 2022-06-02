@@ -1,5 +1,5 @@
-﻿using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
-using FamilyIncomeApi.Models.Dtos.ResumeDtos;
+﻿using FamilyIncomeApi.Data.Dtos.ExpenditureDtos;
+using FamilyIncomeApi.Data.Dtos.ResumeDtos;
 
 namespace FamilyIncomeApi.Models.Entities
 {

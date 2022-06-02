@@ -1,5 +1,5 @@
 ﻿using FamilyIncomeApi.Controllers;
-using FamilyIncomeApi.Models.Dtos.ResumeDtos;
+using FamilyIncomeApi.Data.Dtos.ResumeDtos;
 using FamilyIncomeApi.Services.Interfaces;
 using Moq;
 using System;

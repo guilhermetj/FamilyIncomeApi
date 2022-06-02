@@ -1,4 +1,4 @@
-﻿using FamilyIncomeApi.Models.Dtos.ResumeDtos;
+﻿using FamilyIncomeApi.Data.Dtos.ResumeDtos;
 
 namespace FamilyIncomeApi.Repository.Interfaces
 {

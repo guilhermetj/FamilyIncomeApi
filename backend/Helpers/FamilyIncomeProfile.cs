@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using FamilyIncomeApi.Models.Dtos.CategoryDtos;
-using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
-using FamilyIncomeApi.Models.Dtos.RevenueDtos;
+using FamilyIncomeApi.Data.Dtos.CategoryDtos;
+using FamilyIncomeApi.Data.Dtos.ExpenditureDtos;
+using FamilyIncomeApi.Data.Dtos.RevenueDtos;
 using FamilyIncomeApi.Models.Entities;
 
 namespace FamilyIncomeApi.Helpers

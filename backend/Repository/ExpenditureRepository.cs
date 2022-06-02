@@ -1,5 +1,5 @@
 ﻿using FamilyIncomeApi.Data;
-using FamilyIncomeApi.Models.Dtos.ExpenditureDtos;
+using FamilyIncomeApi.Data.Dtos.ExpenditureDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Models.Params;
 using FamilyIncomeApi.Repository.Interfaces;

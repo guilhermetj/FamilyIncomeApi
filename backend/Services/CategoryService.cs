@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FamilyIncomeApi.Extensions;
-using FamilyIncomeApi.Models.Dtos.CategoryDtos;
+using FamilyIncomeApi.Data.Dtos.CategoryDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Repository.Interfaces;
 using FamilyIncomeApi.Services.Interfaces;

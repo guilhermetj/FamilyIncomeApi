@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using FamilyIncomeApi.Controllers;
-using FamilyIncomeApi.Models.Dtos.CategoryDtos;
+using FamilyIncomeApi.Data.Dtos.CategoryDtos;
 using FamilyIncomeApi.Models.Entities;
 using FamilyIncomeApi.Services.Interfaces;
 using FamilyIncomeTestes.Factories.Controllers;
