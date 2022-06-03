@@ -22,8 +22,8 @@ namespace UsersApi.Controllers
 
             return Ok(result.Successes.FirstOrDefault());
         }
-        [HttpPost("/ativa")]
-        public IActionResult ActiveUser(ActiveUserRequest request)
+        [HttpGet("/active")]
+        public IActionResult ActiveUser([FromQuery]ActiveUserRequest request)
         {
             var result = _service.ActiveUser(request);
             if (result.IsFailed) return StatusCode(500);

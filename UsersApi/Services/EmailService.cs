@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
 using UsersApi.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace UsersApi.Services
 {
@@ -14,14 +15,14 @@ namespace UsersApi.Services
             Enviar(messageEmail);
         }
 
-        private void Enviar(MimeMessage messageEmail)
+        public async Task Enviar(MimeMessage messageEmail)
         {
             using (var client = new SmtpClient())
             {
                 try
                 {
-                    client.Connect("Conexao");
-                    //todo authemail
+                    await client.ConnectAsync("smtp.mailtrap.io", 2525, false);
+                    client.Authenticate("f977a725317d1d", "1cc0ea2563c39e");
                     client.Send(messageEmail);
                 }
                 catch
@@ -39,7 +40,7 @@ namespace UsersApi.Services
         private MimeMessage CreateBodyEmail(Message message)
         {
             var messageEmail = new MimeMessage();
-            messageEmail.From.Add(new MailboxAddress("","Adicionar o remetente"));
+            messageEmail.From.Add(new MailboxAddress("Guilherme", "emailtestetj@gmail.com"));
             messageEmail.To.AddRange(message.Destinatario);
             messageEmail.Subject = message.Subject;
             messageEmail.Body = new TextPart(MimeKit.Text.TextFormat.Text)

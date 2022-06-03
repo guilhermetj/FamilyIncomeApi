@@ -2,6 +2,7 @@
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
 using UsersApi.Data.Dtos;
 using UsersApi.Data.Requests;
 using UsersApi.Models;
@@ -28,8 +29,9 @@ namespace UsersApi.Services
             if (result.Result.Succeeded)
             {
                 var code = _manager.GenerateEmailConfirmationTokenAsync(userIdentity).Result;
+                var encodedCode = HttpUtility.UrlEncode(code);   
                 _emailService.SendEmail(new[] { userIdentity.Email },
-                                                "Link de ativação", userIdentity.Id, code);
+                                                "Link de ativação", userIdentity.Id, encodedCode);
                 return Result.Ok().WithSuccess(code);
             }
             return Result.Fail("Falha ao cadastrar usuario");
@@ -41,7 +43,7 @@ namespace UsersApi.Services
             var identityResult = _manager.ConfirmEmailAsync(userIdentity, request.ActiveCode).Result;
             if (identityResult.Succeeded)
             {
-                return Result.Ok();
+                return Result.Ok().WithSuccess("Conta ativada") ;
             }
             return Result.Fail("Falha ao ativar conta de usuario");
         }

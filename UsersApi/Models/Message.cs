@@ -14,7 +14,7 @@ namespace UsersApi.Models
             Destinatario = new List<MailboxAddress>();
             Destinatario.AddRange(destinatario.Select(d => new MailboxAddress("",d)));
             Subject = subject;
-            Content = $"http://localhost:7012/ativa?UserId={userId}&ActiveCode{code}";
+            Content = $"https://localhost:7012/active?UserId={userId}&ActiveCode={code}";
         }
     }
 }
